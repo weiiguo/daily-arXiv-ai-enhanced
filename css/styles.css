@@ -1064,6 +1064,9 @@ input:checked + .toggle-slider:before {
     align-items: center;
     gap: 8px;
   }
+  #currentDate {
+    display: none !important;
+  }
 }
 
 /* 加载状态 */
