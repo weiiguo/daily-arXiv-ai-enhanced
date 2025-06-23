@@ -868,9 +868,8 @@ main {
 .flatpickr-days {
   width: 100% !important;
   display: flex !important;
-  justify-content: center !important;
+  flex-wrap: wrap !important;
   background-color: transparent !important;
-  grid-template-columns: repeat(7, 1fr) !important;
 }
 
 .dayContainer {
