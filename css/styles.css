@@ -964,14 +964,6 @@ main {
   cursor: not-allowed;
 }
 
-/* —— 修复日期格子对齐 —— */
-.flatpickr-days .dayContainer {
-  display: grid !important;
-  grid-template-columns: repeat(7, 1fr) !important;
-  /* 可选：行高，保证数字垂直居中 */
-  grid-auto-rows: 2.5em !important;
-}
-
 
 .date-range-selector {
   display: flex;
