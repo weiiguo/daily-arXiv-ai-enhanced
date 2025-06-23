@@ -443,6 +443,32 @@ function initDatePicker() {
     }
   });
   
+  // 插入自定义 weekday header（Mon-Sun）
+  setTimeout(() => {
+    // 移除已有的自定义header，避免重复
+    const oldCustomHeader = document.querySelector('.custom-weekdays-header');
+    if (oldCustomHeader) oldCustomHeader.remove();
+
+    // 找到 flatpickr 日历主体
+    const calendar = document.querySelector('.flatpickr-calendar');
+    if (calendar) {
+      const customHeader = document.createElement('div');
+      customHeader.className = 'custom-weekdays-header';
+      ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].forEach(day => {
+        const span = document.createElement('span');
+        span.textContent = day;
+        customHeader.appendChild(span);
+      });
+      // 插入到 .flatpickr-months 之后
+      const months = calendar.querySelector('.flatpickr-months');
+      if (months && months.nextSibling) {
+        calendar.insertBefore(customHeader, months.nextSibling);
+      } else if (months) {
+        calendar.appendChild(customHeader);
+      }
+    }
+  }, 0);
+  
   // 隐藏日期输入框
   const inputElement = document.querySelector('.flatpickr-input');
   if (inputElement) {

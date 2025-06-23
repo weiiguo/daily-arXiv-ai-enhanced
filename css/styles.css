@@ -844,25 +844,24 @@ main {
   border-radius: 50% !important;
 }
 
+/* 隐藏 flatpickr 默认的 weekday header */
 .flatpickr-weekdays {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: row !important;
-  direction: ltr !important;
-  background-color: transparent !important;
+  display: none !important;
+}
+/* 自定义 weekday header 样式 */
+.custom-weekdays-header {
+  display: flex;
+  width: 100%;
   margin-bottom: 5px;
 }
-
-.flatpickr-weekday {
+.custom-weekdays-header span {
+  flex: 1 1 0%;
+  text-align: center;
   height: 28px;
   line-height: 28px;
-  flex: 1 1 0%;
-  background-color: transparent !important;
-  color: var(--text-secondary) !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  order: initial !important;
-  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .flatpickr-days {
