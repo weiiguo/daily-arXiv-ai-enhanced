@@ -844,24 +844,14 @@ main {
   border-radius: 50% !important;
 }
 
-/* 隐藏 flatpickr 默认的 weekday header */
+/* 恢复 flatpickr 默认的 weekday header 显示 */
 .flatpickr-weekdays {
-  display: none !important;
+  display: flex !important;
 }
-/* 自定义 weekday header 样式 */
+
+/* 移除自定义 weekday header 样式 */
 .custom-weekdays-header {
-  display: flex;
-  width: 100%;
-  margin-bottom: 5px;
-}
-.custom-weekdays-header span {
-  flex: 1 1 0%;
-  text-align: center;
-  height: 28px;
-  line-height: 28px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 14px;
+  display: none !important;
 }
 
 .flatpickr-days {
