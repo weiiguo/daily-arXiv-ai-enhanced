@@ -862,8 +862,8 @@ main {
 
 .flatpickr-days {
   width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
   background-color: transparent !important;
 }
 
