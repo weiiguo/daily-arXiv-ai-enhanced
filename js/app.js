@@ -454,21 +454,6 @@ function initDatePicker() {
     }
   });
   
-  // 强制调整 weekday header 顺序为 Mon-Sun
-  setTimeout(() => {
-    const weekdayContainer = document.querySelector('.flatpickr-weekdays');
-    if (weekdayContainer) {
-      const weekdayElems = Array.from(weekdayContainer.querySelectorAll('.flatpickr-weekday'));
-      if (weekdayElems.length === 7 && weekdayElems[0].textContent.startsWith('S')) {
-        // Sun, Mon, Tue, ... -> Mon, Tue, ..., Sun
-        weekdayContainer.innerHTML = '';
-        for (let i = 1; i < 7; i++) {
-          weekdayContainer.appendChild(weekdayElems[i]);
-        }
-        weekdayContainer.appendChild(weekdayElems[0]);
-      }
-    }
-  }, 0);
   
   // 隐藏日期输入框
   const inputElement = document.querySelector('.flatpickr-input');
