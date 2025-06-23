@@ -404,7 +404,8 @@ function initDatePicker() {
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
     locale: {
-      firstDayOfWeek: 0 // 0 表示周日为一周的第一天
+      ...flatpickr.l10ns.zh,
+      firstDayOfWeek: 1 // 以周一为起点
     },
     enable: [
       function(date) {
@@ -432,6 +433,23 @@ function initDatePicker() {
       }
     }
   });
+  
+  // hack: 重新排列 weekday header
+  setTimeout(() => {
+    const weekdayContainer = document.querySelector('.flatpickr-weekdays');
+    if (weekdayContainer) {
+      const weekdayElems = weekdayContainer.querySelectorAll('.flatpickr-weekday');
+      // 以周一为起点重排
+      if (weekdayElems.length === 7) {
+        weekdayContainer.innerHTML = '';
+        // 1-6,0
+        for (let i = 1; i < 7; i++) {
+          weekdayContainer.appendChild(weekdayElems[i]);
+        }
+        weekdayContainer.appendChild(weekdayElems[0]);
+      }
+    }
+  }, 0);
   
   // 隐藏日期输入框
   const inputElement = document.querySelector('.flatpickr-input');
