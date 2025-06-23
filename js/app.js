@@ -400,12 +400,12 @@ function initDatePicker() {
 
   // 使用 zh 语言包，并自定义 weekday header 为英文
   const customLocale = {
-    ...flatpickr.l10ns.zh,
+    ...flatpickr.l10ns.en,
     firstDayOfWeek: 1,
     weekdays: {
-      shorthand: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      shorthand: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       longhand: [
-        'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
       ]
     }
   };
@@ -963,7 +963,8 @@ function formatDate(dateString) {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'numeric',
-    day: 'numeric'
+    day: 'numeric',
+    weekday: 'short'
   });
 }
 
