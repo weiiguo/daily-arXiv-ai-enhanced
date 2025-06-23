@@ -403,6 +403,9 @@ function initDatePicker() {
     inline: true,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
+    locale: {
+      firstDayOfWeek: 0 // 0 表示周日为一周的第一天
+    },
     enable: [
       function(date) {
         // 只启用有效日期
