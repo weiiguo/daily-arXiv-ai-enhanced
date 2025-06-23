@@ -397,15 +397,34 @@ function initDatePicker() {
   availableDates.forEach(date => {
     enabledDatesMap[date] = true;
   });
+
+  // 自定义英文 locale，使 weekday header 以 Mon 开头
+  const customLocale = {
+    firstDayOfWeek: 1,
+    weekdays: {
+      shorthand: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      longhand: [
+        'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+      ]
+    },
+    months: {
+      shorthand: [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      ],
+      longhand: [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ]
+    }
+  };
   
   // 配置 Flatpickr
   flatpickrInstance = flatpickr(datepickerInput, {
     inline: true,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    locale: {
-      firstDayOfWeek: 1 // 以周一为起点，界面为英文
-    },
+    locale: customLocale,
     enable: [
       function(date) {
         // 只启用有效日期
