@@ -392,28 +392,25 @@ function initDatePicker() {
     flatpickrInstance.destroy();
   }
   
-  // 创建可用日期的映射，用于禁用无效日期
   const enabledDatesMap = {};
   availableDates.forEach(date => {
     enabledDatesMap[date] = true;
   });
 
-  // 创建一个以周一为起始的英文 locale
-  // 这是最稳妥的方式：复制 flatpickr 的默认英文配置，然后只修改我们需要的属性
+  // 基于 flatpickr 的默认英文配置，创建一个新的、以周一为起始的 locale
   const englishLocaleMondayFirst = {
     ...flatpickr.l10ns.default, // 复制所有默认英文配置
-    firstDayOfWeek: 1,         // 将一周的起始日重写为星期一 (0=周日, 1=周一)
+    firstDayOfWeek: 1,         // 将一周的起始日重写为星期一
   };
   
-  // 使用我们新创建的、以周一为起始的英文 locale 来配置 Flatpickr
+  // 使用这个最稳妥的 locale 来配置 flatpickr
   flatpickrInstance = flatpickr(datepickerInput, {
     inline: true,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    locale: englishLocaleMondayFirst, // 使用上面创建的 locale
+    locale: englishLocaleMondayFirst,
     enable: [
       function(date) {
-        // 只启用有效日期
         const dateStr = date.getFullYear() + "-" + 
                         String(date.getMonth() + 1).padStart(2, '0') + "-" + 
                         String(date.getDate()).padStart(2, '0');
@@ -422,13 +419,11 @@ function initDatePicker() {
     ],
     onChange: function(selectedDates, dateStr) {
       if (isRangeMode && selectedDates.length === 2) {
-        // 处理日期范围选择
         const startDate = formatDateForAPI(selectedDates[0]);
         const endDate = formatDateForAPI(selectedDates[1]);
         loadPapersByDateRange(startDate, endDate);
         toggleDatePicker();
       } else if (!isRangeMode && selectedDates.length === 1) {
-        // 处理单个日期选择
         const selectedDate = formatDateForAPI(selectedDates[0]);
         if (availableDates.includes(selectedDate)) {
           loadPapersByDate(selectedDate);
@@ -438,7 +433,6 @@ function initDatePicker() {
     }
   });
   
-  // 隐藏日期输入框
   const inputElement = document.querySelector('.flatpickr-input');
   if (inputElement) {
     inputElement.style.display = 'none';
