@@ -846,6 +846,9 @@ main {
 
 .flatpickr-weekdays {
   width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  direction: ltr !important;
   background-color: transparent !important;
   margin-bottom: 5px;
 }
@@ -853,17 +856,19 @@ main {
 .flatpickr-weekday {
   height: 28px;
   line-height: 28px;
-  flex: 1;
+  flex: 1 1 0%;
   background-color: transparent !important;
   color: var(--text-secondary) !important;
   font-weight: 500 !important;
   font-size: 14px !important;
+  order: initial !important;
+  text-align: center;
 }
 
 .flatpickr-days {
   width: 100% !important;
-  display: grid !important;
-  grid-template-columns: repeat(7, 1fr) !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
   background-color: transparent !important;
 }
 
