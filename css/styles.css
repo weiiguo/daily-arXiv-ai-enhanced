@@ -1854,4 +1854,13 @@ footer {
     padding: 0 1px;
     border-radius: 2px;
   }
-} 
+}
+
+/* 强制 flatpickr weekday header 顺序为 Mon, Tue, ..., Sun */
+.flatpickr-weekdays .flatpickr-weekday:nth-child(1) { order: 2; }
+.flatpickr-weekdays .flatpickr-weekday:nth-child(2) { order: 3; }
+.flatpickr-weekdays .flatpickr-weekday:nth-child(3) { order: 4; }
+.flatpickr-weekdays .flatpickr-weekday:nth-child(4) { order: 5; }
+.flatpickr-weekdays .flatpickr-weekday:nth-child(5) { order: 6; }
+.flatpickr-weekdays .flatpickr-weekday:nth-child(6) { order: 7; }
+.flatpickr-weekdays .flatpickr-weekday:nth-child(7) { order: 1; } 

@@ -392,25 +392,33 @@ function initDatePicker() {
     flatpickrInstance.destroy();
   }
   
+  // 创建可用日期的映射，用于禁用无效日期
   const enabledDatesMap = {};
   availableDates.forEach(date => {
     enabledDatesMap[date] = true;
   });
 
-  // 基于 flatpickr 的默认英文配置，创建一个新的、以周一为起始的 locale
-  const englishLocaleMondayFirst = {
-    ...flatpickr.l10ns.default, // 复制所有默认英文配置
-    firstDayOfWeek: 1,         // 将一周的起始日重写为星期一
+  // 自定义英文 locale，使 weekday header 以 Mon 开头
+  const customLocale = {
+    ...flatpickr.l10ns.default,
+    firstDayOfWeek: 1,
+    weekdays: {
+      shorthand: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      longhand: [
+        'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+      ]
+    }
   };
   
-  // 使用这个最稳妥的 locale 来配置 flatpickr
+  // 配置 Flatpickr
   flatpickrInstance = flatpickr(datepickerInput, {
     inline: true,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    locale: englishLocaleMondayFirst,
+    locale: customLocale,
     enable: [
       function(date) {
+        // 只启用有效日期
         const dateStr = date.getFullYear() + "-" + 
                         String(date.getMonth() + 1).padStart(2, '0') + "-" + 
                         String(date.getDate()).padStart(2, '0');
@@ -419,11 +427,13 @@ function initDatePicker() {
     ],
     onChange: function(selectedDates, dateStr) {
       if (isRangeMode && selectedDates.length === 2) {
+        // 处理日期范围选择
         const startDate = formatDateForAPI(selectedDates[0]);
         const endDate = formatDateForAPI(selectedDates[1]);
         loadPapersByDateRange(startDate, endDate);
         toggleDatePicker();
       } else if (!isRangeMode && selectedDates.length === 1) {
+        // 处理单个日期选择
         const selectedDate = formatDateForAPI(selectedDates[0]);
         if (availableDates.includes(selectedDate)) {
           loadPapersByDate(selectedDate);
@@ -433,6 +443,7 @@ function initDatePicker() {
     }
   });
   
+  // 隐藏日期输入框
   const inputElement = document.querySelector('.flatpickr-input');
   if (inputElement) {
     inputElement.style.display = 'none';
