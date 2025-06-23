@@ -398,34 +398,19 @@ function initDatePicker() {
     enabledDatesMap[date] = true;
   });
 
-  // 修正后的自定义 locale 对象
-  const customLocale = {
-    firstDayOfWeek: 1, // 将星期一设为一周的开始
-    weekdays: {
-      // 数组必须总是从星期日开始
-      shorthand: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      longhand: [
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-      ]
-    },
-    months: {
-      shorthand: [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-      ],
-      longhand: [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ]
-    }
+  // 创建一个以周一为起始的英文 locale
+  // 这是最稳妥的方式：复制 flatpickr 的默认英文配置，然后只修改我们需要的属性
+  const englishLocaleMondayFirst = {
+    ...flatpickr.l10ns.default, // 复制所有默认英文配置
+    firstDayOfWeek: 1,         // 将一周的起始日重写为星期一 (0=周日, 1=周一)
   };
   
-  // 使用修正后的 locale 配置 Flatpickr
+  // 使用我们新创建的、以周一为起始的英文 locale 来配置 Flatpickr
   flatpickrInstance = flatpickr(datepickerInput, {
     inline: true,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    locale: customLocale, // 使用上面定义的 customLocale
+    locale: englishLocaleMondayFirst, // 使用上面创建的 locale
     enable: [
       function(date) {
         // 只启用有效日期
