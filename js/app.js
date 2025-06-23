@@ -398,13 +398,14 @@ function initDatePicker() {
     enabledDatesMap[date] = true;
   });
 
-  // 自定义英文 locale，使 weekday header 以 Mon 开头
+  // 修正后的自定义 locale 对象
   const customLocale = {
-    firstDayOfWeek: 1,
+    firstDayOfWeek: 1, // 将星期一设为一周的开始
     weekdays: {
-      shorthand: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      // 数组必须总是从星期日开始
+      shorthand: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       longhand: [
-        'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
       ]
     },
     months: {
@@ -419,14 +420,12 @@ function initDatePicker() {
     }
   };
   
-  // 配置 Flatpickr
+  // 使用修正后的 locale 配置 Flatpickr
   flatpickrInstance = flatpickr(datepickerInput, {
     inline: true,
     dateFormat: "Y-m-d",
     defaultDate: availableDates[0],
-    locale: {
-      firstDayOfWeek: 1 // 以周一为起点，界面为英文
-    },
+    locale: customLocale, // 使用上面定义的 customLocale
     enable: [
       function(date) {
         // 只启用有效日期
@@ -453,7 +452,6 @@ function initDatePicker() {
       }
     }
   });
-  
   
   // 隐藏日期输入框
   const inputElement = document.querySelector('.flatpickr-input');
