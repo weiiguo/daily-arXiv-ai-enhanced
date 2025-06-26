@@ -959,8 +959,11 @@ function toggleView() {
 }
 
 function formatDate(dateString) {
-  const date = new Date(dateString);
+  const [year, month, day] = dateString.split('-').map(Number);
+  // 使用 UTC 时间避免时区差异导致的星期显示错误
+  const date = new Date(Date.UTC(year, month - 1, day));
   return date.toLocaleDateString('en-US', {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
