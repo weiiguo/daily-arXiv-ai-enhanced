@@ -959,13 +959,22 @@ function toggleView() {
 }
 
 function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
+  const [year, month, day] = dateString.split('-').map(Number);
+  // 使用 UTC 时间构造日期以避免时区差异
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  // 手动计算星期以确保始终与日期匹配
+  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekday = weekdays[date.getUTCDay()];
+
+  const formatted = date.toLocaleDateString('en-US', {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'numeric',
-    day: 'numeric',
-    weekday: 'short'
+    day: 'numeric'
   });
+
+  return `${formatted}, ${weekday}`;
 }
 
 async function loadPapersByDateRange(startDate, endDate) {

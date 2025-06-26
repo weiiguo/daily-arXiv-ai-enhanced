@@ -846,7 +846,8 @@ main {
 
 /* 恢复 flatpickr 默认的 weekday header 显示 */
 .flatpickr-weekdays {
-  display: flex !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
 }
 
 /* 移除自定义 weekday header 样式 */
@@ -856,8 +857,8 @@ main {
 
 .flatpickr-days {
   width: 100% !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
   background-color: transparent !important;
 }
 
@@ -865,9 +866,7 @@ main {
   width: 100% !important;
   min-width: 100% !important;
   max-width: 100% !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: flex-start !important;
+  display: contents !important;
   padding: 0 !important;
 }
 
@@ -877,8 +876,7 @@ main {
   line-height: 36px !important;
   border-radius: 50% !important;
   max-width: 36px !important;
-  width: calc(100% / 7 - 4px) !important;
-  flex: 0 0 calc(100% / 7 - 4px) !important;
+  width: 100% !important;
   display: inline-flex !important;
   justify-content: center !important;
   align-items: center !important;
