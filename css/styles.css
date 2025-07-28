@@ -165,15 +165,18 @@ header {
   display: flex;
   align-items: center;
   gap: 16px;
+  /* 添加最小宽度来保持布局平衡 */
+  min-width: 200px;
 }
 
 .header-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  /* 移除绝对定位，使用flex布局 */
+  position: static;
+  transform: none;
+  flex: 1;
 }
 
 .site-logo {
@@ -276,7 +279,10 @@ header {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+  /* 添加最小宽度来保持布局平衡 */
+  min-width: 200px;
+  justify-content: flex-end;
 }
 
 .date-selector {
@@ -1126,12 +1132,15 @@ input:checked + .toggle-slider:before {
 @media (max-width: 768px) {
   .header-content {
     padding: 12px 16px;
+    flex-direction: column;
+    align-items: stretch;
   }
   
   .header-center {
     position: static;
     transform: none;
     margin-bottom: 8px;
+    order: 1;
   }
   
   .header-left {
@@ -1139,7 +1148,9 @@ input:checked + .toggle-slider:before {
   }
   
   .header-controls {
-    margin-left: auto;
+    margin-left: 0;
+    justify-content: center;
+    order: 2;
   }
   
   .category-scroll {
