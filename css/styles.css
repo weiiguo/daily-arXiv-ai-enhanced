@@ -159,6 +159,8 @@ header {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+  /* 添加相对定位作为绝对定位的参考 */
+  position: relative;
 }
 
 .header-left {
@@ -285,6 +287,8 @@ header {
   /* 添加最小宽度来保持布局平衡 */
   min-width: 200px;
   justify-content: flex-end;
+  /* 确保在flex布局中保持在右边 */
+  margin-left: auto;
 }
 
 .date-selector {
