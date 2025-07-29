@@ -167,16 +167,18 @@ header {
   gap: 16px;
   /* 添加最小宽度来保持布局平衡 */
   min-width: 200px;
+  /* 隐藏空的header-left */
+  visibility: hidden;
 }
 
 .header-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 移除绝对定位，使用flex布局 */
-  position: static;
-  transform: none;
-  flex: 1;
+  /* 使用绝对定位来真正居中 */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .site-logo {
